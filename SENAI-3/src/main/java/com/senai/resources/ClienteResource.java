@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,18 +25,21 @@ public class ClienteResource {
 	@Autowired
 	private ClienteService clienteService;
 
+	@CrossOrigin
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable Integer id) {
 		Cliente obj = clienteService.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Cliente>> findAll(){
 		List<Cliente> listCliente = clienteService.findAll();
 		return ResponseEntity.ok().body(listCliente);
 	}
 	
+	@CrossOrigin
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Cliente obj) {
 		obj = clienteService.insert(obj);

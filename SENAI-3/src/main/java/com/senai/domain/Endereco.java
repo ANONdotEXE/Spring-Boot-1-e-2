@@ -3,6 +3,7 @@ package com.senai.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Endereco implements Serializable {
@@ -18,14 +19,15 @@ public class Endereco implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@Column(name = "id_endereco")
+	private Integer idEndereco;
 	private String logradouro;
 	private String numero;
 	private String complemento;
 	private String bairro;
 	private String cep;
 
-	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
@@ -42,7 +44,7 @@ public class Endereco implements Serializable {
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
 			Cliente cliente, Cidade cidade) {
 		super();
-		this.id = id;
+		this.idEndereco = id;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.complemento = complemento;
@@ -53,11 +55,11 @@ public class Endereco implements Serializable {
 	}
 
 	public Integer getId() {
-		return id;
+		return idEndereco;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.idEndereco = id;
 	}
 
 	public String getLogradouro() {
@@ -114,7 +116,7 @@ public class Endereco implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bairro, cep, cliente, complemento, id, logradouro, numero);
+		return Objects.hash(bairro, cep, cliente, complemento, idEndereco, logradouro, numero);
 	}
 
 	@Override
@@ -128,7 +130,7 @@ public class Endereco implements Serializable {
 		Endereco other = (Endereco) obj;
 		return Objects.equals(bairro, other.bairro) && Objects.equals(cep, other.cep)
 				&& Objects.equals(cliente, other.cliente) && Objects.equals(complemento, other.complemento)
-				&& Objects.equals(id, other.id) && Objects.equals(logradouro, other.logradouro)
+				&& Objects.equals(idEndereco, other.idEndereco) && Objects.equals(logradouro, other.logradouro)
 				&& Objects.equals(numero, other.numero);
 	}
 

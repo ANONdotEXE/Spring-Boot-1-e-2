@@ -48,7 +48,8 @@ public class Senai3Application implements CommandLineRunner {
 		
 		Cliente cli1 = new  Cliente(null, "Lucas Oliveira Assis", "12245678908", "lucas2003assis@gmail.com", 
 				TipoCliente.PESSOAFISICA);
-		Cliente cli2 = new  Cliente();
+		Cliente cli2 = new  Cliente(null, "Bibor de Faria Lima", "23475698573", "teste@gmail.com",
+				TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("24000002345", "12124354987"));
 		cli2.getTelefones().addAll(Arrays.asList("44444567789", "00000987656"));
 		clienteRepository.saveAll(Arrays.asList(cli1,cli2));

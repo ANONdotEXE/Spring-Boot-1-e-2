@@ -16,9 +16,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.senai.domain.enuns.TipoCliente;
 
+@Table(name = "cliente")
 @Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -34,7 +38,8 @@ public class Cliente implements Serializable {
 	private String email;
 	
 	private Integer tipo;
-
+	
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "IdCliente")
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
@@ -43,6 +48,22 @@ public class Cliente implements Serializable {
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	public Cliente() {
+	}
+	
+	public double somar(double num1, double num2) {
+		return num1 + num2;
+	}
+	
+	public double subtrair(double num1, double num2) {
+		return num1 - num2;
+	}
+	
+	public double multiplicar(double num1, double num2) {
+		return num1 * num2;
+	}
+	
+	public double dividir(double num1, double num2) {
+		return num1 / num2;
 	}
 
 	public Cliente(Integer idCliente, String nome, String cpfOuCnpj, String email, TipoCliente tipo) {
